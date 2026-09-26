@@ -1,0 +1,440 @@
+Toronto Mobility Analytics — Project Rule
+Project Identity
+
+This repository contains a portfolio project focused primarily on data analytics and business intelligence, with supporting data engineering work.
+
+The project uses TTC and Bike Share Toronto data to investigate how current mobility conditions compare with historical mobility patterns.
+
+The project is intended to be the developer's first substantial data project. The developer has a computer science background but is still learning practical data analytics, BI, data engineering, databases, APIs, and data pipelines.
+
+Core Analytical Thesis
+
+The central analytical idea is:
+
+Understand typical mobility patterns using historical data, then use live/current data to determine how current conditions compare with those historical patterns.
+
+The project should not become a generic transportation dashboard.
+
+Historical data provides context and baselines.
+
+Live/current data provides observations that can be compared against that context.
+
+The relationship is:
+
+Historical Data
+      ↓
+Typical Mobility Patterns
+      ↓
+Historical Baselines
+      ↓
+Current Data
+      ↓
+Current vs Historical Comparison
+      ↓
+Identify Meaningful Deviations
+
+Primary Analytical Questions
+
+The project should remain centered around two connected questions.
+
+Question 1
+
+How do mobility patterns vary across time and location for TTC and Bike Share Toronto?
+
+This establishes historical context.
+
+Relevant dimensions may include:
+
+Time of day
+
+Day of week
+
+Weekday versus weekend
+
+Date/month/season where appropriate
+
+Location
+
+Station
+
+Route where supported
+
+Transportation system
+
+Question 2
+
+How do current TTC and Bike Share conditions compare with their historical patterns, and where are the largest deviations occurring?
+
+This connects the historical analysis to live/current data.
+
+The project should investigate:
+
+Current conditions
+
+Historical expectations
+
+Current versus historical differences
+
+Locations with unusual conditions
+
+Time periods with unusual conditions
+
+Magnitude and persistence of deviations where supported
+
+The exact methodology must be determined from the actual available data.
+
+Data Sources
+
+The project focuses on:
+
+TTC
+
+Bike Share Toronto
+
+GO Transit is outside the initial scope.
+
+Do not assume that a desired field, metric, API, or historical dataset exists.
+
+Before designing major parts of the system, investigate the actual public data and documentation.
+
+Historical and Live Data
+
+Both historical and current/live data are important.
+
+Historical data should be used to:
+
+Identify recurring patterns
+
+Establish baselines
+
+Understand temporal behavior
+
+Understand spatial behavior
+
+Provide context
+
+Live/current data should be used to:
+
+Capture current conditions
+
+Demonstrate repeatable extraction
+
+Compare current observations with historical expectations
+
+Support future refreshes
+
+Live data should have analytical purpose rather than existing only as a technical demonstration.
+
+Analytics-First Scope
+
+This is primarily a data analytics / BI project.
+
+Data engineering is intentionally included as supporting infrastructure.
+
+Prioritize:
+
+Analytical validity
+
+Data quality
+
+Meaningful metrics
+
+Clear visual communication
+
+Appropriate data engineering
+
+Technical sophistication
+
+Do not introduce engineering complexity merely to make the project appear more advanced.
+
+Interactive Visualization
+
+An interactive map may be used when it supports the analytical questions.
+
+Potential uses include:
+
+Bike Share station locations
+
+Current station conditions
+
+Historical station patterns
+
+Current versus historical deviations
+
+Spatial investigation
+
+Do not add a map merely because the developer has a computer science/frontend background.
+
+Every major visualization should have an analytical purpose.
+
+Station-Level Analysis
+
+Bike Share station-level investigation is an important potential analytical component.
+
+Where supported by the data, a station detail view may show:
+
+Current conditions
+
+Historical typical conditions
+
+Current versus historical differences
+
+Historical patterns by hour
+
+Historical patterns by day
+
+Recent observations
+
+Geographic context
+
+The actual metrics must be based on the available data.
+
+Data Engineering
+
+The project should include practical data engineering work without becoming a dedicated data engineering project.
+
+Potential components include:
+
+API/feed extraction
+
+Live/frequently updated ingestion
+
+Raw data storage
+
+Data validation
+
+Timestamp handling
+
+Cleaning
+
+Transformation
+
+Deduplication
+
+Analytical database/storage
+
+Repeatable refresh processes
+
+The architecture should remain proportional to a first data project.
+
+Data Investigation Before Architecture
+
+Do not finalize major architecture decisions before investigating the actual data.
+
+When encountering a data source, determine:
+
+What it represents
+
+Available fields
+
+Historical coverage
+
+Update frequency
+
+Timestamp format
+
+Time zone
+
+Identifiers
+
+Geographic information
+
+Data limitations
+
+Reliability
+
+Whether it supports the analytical questions
+
+Clearly distinguish verified information from assumptions.
+
+AI Collaboration
+
+The developer is using Cursor as an active learning and implementation partner.
+
+Cursor is allowed to:
+
+Write code
+
+Modify files
+
+Implement features
+
+Suggest architecture
+
+Debug code
+
+Generate tests
+
+Research technical approaches
+
+Do not refuse to provide code merely because the developer is learning.
+
+However, the developer must understand significant implementation decisions and resulting code.
+
+Teaching Behavior
+
+When introducing an unfamiliar concept, explain:
+
+What it is
+
+Why this project needs it
+
+How it fits into the system
+
+Important alternatives or tradeoffs
+
+How the implementation works
+
+The level of explanation should match the complexity of the concept.
+
+Avoid unnecessary lectures about concepts the developer already understands.
+
+Progressive Assistance
+
+When the developer is trying to solve a learning problem, use the Manware learning workflows where appropriate.
+
+Depending on the situation, provide:
+
+A hint
+
+A question that guides the developer
+
+An explanation
+
+A partial solution
+
+A complete implementation
+
+Do not artificially withhold code when the developer explicitly asks for implementation.
+
+Important Decisions
+
+For significant analytical or architectural decisions, do not silently make assumptions.
+
+Explicitly identify decisions involving:
+
+Historical baselines
+
+Deviation definitions
+
+Aggregations
+
+Time windows
+
+Data cleaning
+
+Missing values
+
+Database design
+
+Pipeline architecture
+
+BI metrics
+
+Visualization choices
+
+Explain the relevant tradeoffs before or alongside implementation.
+
+Plan Mode
+
+Before major implementation begins, use Cursor Plan mode.
+
+The initial plan should:
+
+Read the project documentation.
+
+Understand the analytical thesis.
+
+Understand the two analytical questions.
+
+Inspect the current repository.
+
+Investigate the actual data sources.
+
+Identify technical requirements.
+
+Propose an implementation architecture.
+
+Identify assumptions and uncertainties.
+
+Identify risks and data limitations.
+
+Produce a staged implementation plan.
+
+Do not begin substantial implementation during the initial planning phase unless explicitly requested.
+
+The plan is a proposal and should be reviewed before implementation.
+
+Understanding Requirement
+
+After substantial implementation, the developer should be able to explain:
+
+What was built
+
+Why it was built
+
+How data flows through it
+
+Why important technical decisions were made
+
+What assumptions exist
+
+How the system can fail
+
+How it can be tested
+
+How it supports the analytical questions
+
+The developer does not need to memorize every line of generated code.
+
+Project Decision Principle
+
+When choosing between multiple technically valid approaches, prefer the approach that:
+
+Supports the analytical questions
+
+Is appropriate for the available data
+
+Is understandable to the developer
+
+Is maintainable
+
+Demonstrates relevant skills
+
+Avoids unnecessary complexity
+
+The goal is a strong analytics/BI project with meaningful data engineering exposure, not maximum technical complexity.
+
+Final Portfolio Goal
+
+The finished project should demonstrate practical ability in:
+
+Data analytics
+
+Business intelligence
+
+SQL
+
+Python
+
+APIs
+
+Data ingestion
+
+Data transformation
+
+Historical/current comparison
+
+Time-series analysis
+
+Data validation
+
+Visualization
+
+Geospatial analysis where justified
+
+Basic data engineering
+
+Git/GitHub
+
+The final project should be explainable clearly in a data analytics internship interview.
