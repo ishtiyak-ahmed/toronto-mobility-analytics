@@ -1,329 +1,235 @@
-Toronto Mobility Analytics
+Toronto Mobility Reliability — Project Context
 Project Overview
 
-Toronto Mobility Analytics is a data analytics and business intelligence project that uses TTC and Bike Share Toronto data to analyze how Toronto's mobility conditions change across time and location.
+Toronto Mobility Reliability is a portfolio project focused primarily on data analytics and business intelligence, with meaningful supporting data engineering work.
 
-The project is intentionally designed as a data analytics / BI project first, while incorporating a meaningful amount of data engineering through the collection, storage, cleaning, transformation, and validation of live transportation data.
+The project uses publicly available data from:
 
-The project should demonstrate that the developer can work with both:
-
-Historical transportation data
-
-Continuously updated or live transportation data
-
-Structured and semi-structured data
-
-Time-series data
-
-Location-based data
-
-Analytical databases
-
-Interactive BI visualizations
-
-The project should answer analytical questions rather than simply display transportation information.
-
-Project Thesis
-
-The central idea is to compare current mobility conditions with historical patterns.
-
-Historical data establishes what is normally expected for a particular transportation context, such as a location, time of day, or day of week. Live data allows the project to determine what is happening now and whether current conditions resemble, differ from, or deviate from those historical patterns.
-
-This creates a natural relationship between the analytics and data engineering components:
-
-Historical data provides context and baselines.
-
-Live data provides current observations.
-
-Data engineering processes collect and organize both types of data.
-
-Analytical transformations make the datasets comparable.
-
-Analytics identifies meaningful differences and patterns.
-
-BI visualizations communicate those findings interactively.
-
-The project should therefore demonstrate more than the ability to build a dashboard. It should demonstrate the ability to build a small analytical data system and use it to answer meaningful questions.
-
-Transportation Systems
-
-The project will focus on two transportation systems:
-
-TTC
+Toronto Transit Commission (TTC)
 
 Bike Share Toronto
 
-GO Transit will not be included in the initial scope.
+The project investigates historical mobility patterns and uses current/live operational data to identify conditions that differ from those historical patterns.
 
-The two systems were selected because they provide different but related views of urban mobility.
+The project is intentionally designed as a first substantial data project for a computer science student transitioning toward data analytics, BI, and eventually data engineering.
 
-TTC
+Central Thesis
 
-TTC data can provide information about transit service, routes, vehicles, stops, schedules, and/or real-time service conditions depending on the available public datasets.
+The project asks:
 
-Bike Share Toronto
+Where and when does Toronto's mobility system experience recurring service or availability pressure, and where do current conditions deviate from those expected patterns?
 
-Bike Share data can provide information about stations, available bikes, available docks, station capacity, and station status over time depending on the available public feeds.
+The project does not attempt to create a universal mobility score or force TTC and Bike Share into identical metrics.
 
-The project should use the actual available public datasets rather than assuming that every desired metric is available.
+Instead, both systems are analyzed using the measurements their public data actually supports.
 
-Primary Analytical Questions
+The shared analytical framework is:
 
-The project should revolve around two closely connected questions.
+Historical Data
+      ↓
+Typical Patterns
+      ↓
+Expected Conditions
+      ↓
+Current Data
+      ↓
+Deviation
+      ↓
+Time + Location + Context
 
-Question 1 — What does typical mobility look like?
+Analytical Questions
+Question 1
 
-How do mobility patterns vary across time and location for TTC and Bike Share Toronto?
+When and where do TTC service disruptions and Bike Share availability pressures typically occur?
 
-This question establishes the historical context.
+This establishes historical context.
 
-The analysis should investigate patterns such as:
+For TTC, this may involve:
 
-Hour of day
+Delay frequency
+
+Delay duration
+
+Gap
+
+Time of day
 
 Day of week
 
-Weekday versus weekend
+Route or line
 
-Location
+Station or location
 
-Transportation system
+Direction
 
-Route or station where appropriate
+Incident category
 
-Seasonal patterns where sufficient historical data exists
+For Bike Share, this may involve:
 
-The goal is to understand what normal or typical conditions look like rather than simply reporting raw counts.
+Trip volume
 
-Question 2 — How do current conditions compare with those patterns?
+Time of day
 
-How do current TTC and Bike Share conditions compare with their historical patterns, and where are the largest deviations occurring?
+Day of week
 
-This question connects the historical analysis to the live-data component.
+Season
 
-The analysis should investigate:
+Station activity
 
-Current conditions
+Origin/destination patterns
 
-Historical expectations for comparable periods
+Station inflow/outflow imbalance
 
-Differences between current and historical conditions
+The final metric definitions must be based on inspection of the actual datasets.
 
-Locations experiencing unusual conditions
+Question 2
 
-Time periods experiencing unusual conditions
+Where do current TTC and Bike Share conditions deviate from their expected patterns?
 
-Magnitude and persistence of deviations where the data supports it
+This connects historical analytics with live data.
 
-The exact definition of "deviation" must be determined during the analytical design phase rather than arbitrarily chosen.
+For Bike Share, current station availability can be compared with historical station activity and/or historically collected station-state observations.
 
-Why These Questions Work Together
+For TTC, current service alerts and supported real-time operational information can be contextualized against historical delay patterns.
 
-The questions form a single analytical progression:
+The project must not claim that current data measures something that the public feed does not actually measure.
 
-Historical Data
-      ↓
-Understand Typical Patterns
-      ↓
-Establish Historical Baselines
-      ↓
-Collect Current Data
-      ↓
-Compare Current Conditions
-      ↓
-Identify Meaningful Deviations
-      ↓
-Investigate Where and When They Occur
+Why Live Data Matters
 
+Live data is not included merely to create an impressive-looking dashboard.
 
-The project therefore does not consist of unrelated TTC and Bike Share analyses.
+It has an analytical purpose.
 
-Instead, both systems contribute to the same broader investigation:
+Historical data answers:
 
-Understand normal mobility patterns and use live data to determine how current conditions compare with those patterns.
+What normally happens?
 
-Data Strategy
+Current data answers:
 
-The project should use both historical and live/current data where available.
+What is happening now?
 
-Historical Data
+The project then asks:
 
-Historical data will be used to:
+How different is the current condition from what we would expect?
 
-Identify recurring patterns
+Bike Share is particularly suitable for this because its public GBFS station-status feed provides current station state. Repeatedly collecting those observations allows this project to build its own historical record of live station conditions.
 
-Establish analytical baselines
+TTC also provides current service information, but its real-time feed has documented coverage limitations. These limitations are part of the project and must be documented rather than hidden.
 
-Compare different time periods
+Why TTC and Bike Share Belong Together
 
-Understand spatial differences
+TTC and Bike Share do not provide identical data.
 
-Provide context for current observations
+That is intentional.
 
-Live Data
+TTC provides a service-reliability case.
 
-Live or frequently updated data will be used to:
+Bike Share provides a station-availability case.
 
-Capture current transportation conditions
+The project connects them through a common analytical methodology rather than a fabricated common metric.
 
-Demonstrate automated data extraction
+TTC
+Historical delays → expected service conditions → current service information
 
-Create observations that can be compared against historical data
+Bike Share
+Historical activity → expected station conditions → current station availability
 
-Support future refreshes of the analytical system
+Project Priorities
 
-The project should avoid treating live data as merely a visual feature. Its purpose is to support the central analytical question.
+The project should prioritize:
 
-Interactive Map
+Analytical validity
 
-An interactive map should be included if it contributes to the analysis.
+Data quality
 
-The map is not required simply because the developer has a CS/frontend background.
+Meaningful questions
 
-Potential uses include:
+Clear BI communication
 
-Showing Bike Share stations geographically
+Appropriate data engineering
 
-Showing current station conditions
+Technical sophistication
 
-Highlighting locations with unusually high or low availability
+Technical complexity should not be added unless it serves the analytical requirements.
 
-Showing TTC-related locations or spatial patterns where the data supports it
+Intended Skills Demonstrated
 
-Allowing users to select a location and inspect its historical/current context
+The finished project should demonstrate experience with:
 
-The map should answer or support an analytical question.
-
-It should not become a decorative frontend feature disconnected from the analysis.
-
-Station-Level Analysis
-
-Bike Share station-level analysis is expected to be an important part of the project.
-
-A station detail view may allow a user to investigate:
-
-Current station status
-
-Historical station behavior
-
-Typical availability
-
-Differences between current and historical conditions
-
-Relevant time-of-day patterns
-
-Other metrics supported by the data
-
-The exact metrics should be determined after examining the available data.
-
-Data Engineering Scope
-
-This is not intended to be a dedicated data engineering project.
-
-However, the project should contain enough engineering work to demonstrate that the developer can work with real-world data pipelines.
-
-Potential components include:
-
-Extracting data from public APIs or feeds
-
-Handling live/frequently updated data
-
-Storing raw observations
-
-Cleaning and transforming data
-
-Handling timestamps and time zones
-
-Deduplicating records where necessary
-
-Validating incoming data
-
-Loading data into an analytical database
-
-Creating reproducible transformations
-
-Supporting repeated data refreshes
-
-The engineering architecture should remain proportional to the project's primary goal: analytics.
-
-BI / Visualization Goals
-
-The final BI layer should communicate analytical findings rather than simply expose raw data.
-
-Potential visualizations include:
-
-Historical time-series trends
-
-Hour/day heatmaps
-
-Historical versus current comparisons
-
-Deviation indicators
-
-Station-level analysis
-
-Geographic visualizations
-
-Filters for date, time, transportation system, and location
-
-The final dashboard should help a user answer the project's analytical questions without requiring them to inspect raw data.
-
-Technical Learning Goals
-
-By completing this project, the developer should gain practical experience with:
-
-Python for data work
-
-APIs and public data feeds
-
-JSON and other structured/semi-structured data
-
-Data ingestion
-
-Data cleaning
+Python
 
 SQL
 
-Relational databases
+Data cleaning
 
-Time-series analysis
+Exploratory data analysis
+
+Historical/time-series analysis
+
+APIs and public data feeds
+
+Real-time data ingestion
 
 Data validation
 
-Historical baselines
+Data storage
 
-Comparative analysis
+Data transformation
 
-BI/dashboard development
+Analytical data modeling
+
+Business intelligence
+
+Interactive visualization
 
 Geospatial visualization
 
-Git and GitHub
+Git/GitHub
 
-Basic data pipeline design
+Basic data engineering
 
-The developer should understand the reasoning behind the implementation rather than merely reproducing generated code.
+Interactive Map
 
-Scope Principles
+An interactive map is appropriate because location is important to both systems.
 
-The project should follow these principles:
+The map should support analysis rather than exist purely for visual appeal.
 
-Analytics comes first.
+Potential uses include:
 
-Every major component should support an analytical purpose.
+Bike Share station availability
 
-Live data should be used meaningfully, not simply because it looks impressive.
+Station-level historical/current comparison
 
-Historical and current data should be comparable.
+Identification of unusual stations
 
-The available public data should determine what can actually be analyzed.
+TTC service alerts or supported operational information
 
-Technical complexity should serve the analytical goal.
+Spatial investigation of anomalies
 
-The project should remain achievable as a first data project.
+The map should only display information that is analytically meaningful and supported by the data.
 
-The final system should be explainable in an internship interview.
+Scope
 
-AI may assist with implementation, but the developer must understand the resulting system.
+Initial scope:
 
-The project should prioritize depth over unnecessary feature count.
+TTC
+
+Bike Share Toronto
+
+GO Transit is intentionally excluded.
+
+The project is primarily a data analytics / BI project with supporting data engineering, not a dedicated data engineering project.
+
+Guiding Principle
+
+The project must follow the data.
+
+Do not assume a desired metric exists.
+
+Do not force historical and current data to represent the same concept.
+
+Do not hide data limitations.
+
+Do not build technical components simply because they look impressive.
+
+The analytical questions, methodology, and architecture should be derived from the actual characteristics of the available data.

@@ -1,277 +1,218 @@
 AI Learning Guide
 Purpose
 
-AI tools, particularly Cursor, will be used throughout this project to accelerate development while ensuring that the developer actually understands the resulting system.
+This project uses AI as an implementation and learning partner.
 
-The goal is not to avoid AI-generated code.
+The goal is not to avoid using AI-generated code.
 
-The goal is to avoid using code that the developer cannot explain, modify, debug, or defend in an interview.
+The goal is to use AI to accelerate development while ensuring the developer understands the resulting system well enough to explain, modify, debug, and defend it.
 
-Role of Cursor
+How AI Should Be Used
 
-Cursor should act as:
+AI may:
 
-A coding assistant
+Write code
 
-A technical teacher
+Suggest architecture
 
-A debugging partner
+Research implementation approaches
 
-A research assistant
+Explain concepts
 
-A code reviewer
+Debug problems
 
-A planning partner
+Write tests
 
-Cursor should not make important architectural or analytical decisions without explaining the reasoning behind them.
+Review code
+
+Refactor code
+
+Help interpret data
+
+Suggest analytical methods
+
+Help document the project
+
+AI should not silently make important analytical or architectural decisions.
+
+Learning Principle
+
+When introducing an important new concept, explain:
+
+What it is.
+
+Why this project needs it.
+
+How it fits into the system.
+
+What alternatives exist.
+
+Why the proposed approach is appropriate.
+
+What the implementation is doing.
+
+Explanations should be proportional to the difficulty of the concept.
+
+Do not explain basic programming concepts the developer already understands unless requested.
 
 Code Generation
 
-Cursor is allowed to write code.
+The AI is explicitly allowed to generate complete code.
 
-The project should not impose a rule that prevents Cursor from implementing requested functionality.
+Do not intentionally withhold code when code is the appropriate solution.
 
-When implementation is appropriate, Cursor should:
+However, generated code should be accompanied by enough explanation for the developer to understand:
 
-Explain what is being implemented.
+what it does
 
-Identify important design decisions.
+why it exists
 
-Implement the requested functionality.
+important implementation decisions
 
-Explain the resulting code.
+assumptions
 
-Identify assumptions and potential failure cases.
+potential failure cases
 
-Provide appropriate tests or validation where relevant.
+For significant pieces of code, explain the structure before or after implementation.
 
-The developer should then review and understand the implementation.
+Do Not Fake Understanding
 
-Learning Before Implementation
+The developer should not blindly copy code.
 
-When encountering a new concept, the preferred workflow is:
+After implementing a significant component, the developer should be able to answer questions such as:
 
-Encounter unfamiliar concept
-        ↓
-Understand the purpose
-        ↓
-Understand the relevant design choices
-        ↓
-Implement
-        ↓
-Review the implementation
-        ↓
-Explain it independently
+What does this component do?
 
+What data enters it?
 
-The developer should not be expected to already know the technologies being introduced.
+What data leaves it?
 
-Avoid Blind Copying
+Why was it designed this way?
 
-Cursor should avoid producing large amounts of unexplained code when a smaller explanation or incremental implementation would be more appropriate.
+What happens when the input is invalid?
 
-When a new technology is introduced, Cursor should explain:
+What assumptions does it make?
 
-What it is
+How would I modify it?
 
-Why the project needs it
-
-What problem it solves
-
-What alternatives exist
-
-Why the selected approach is reasonable
-
-The explanation should be proportional to the complexity of the concept.
-
-Use the Manware Learning Workflows
-
-The Manware Cursor toolkit is installed in .cursor/.
-
-Its learning workflows should be used where appropriate.
-
-Relevant workflows include:
-
-Learning unfamiliar concepts
-
-Exploring unfamiliar systems
-
-Asking for hints
-
-Explaining existing code
-
-Debugging
-
-Reviewing code
-
-Testing
-
-Architectural reasoning
-
-Retrieval/practice
-
-Learning from mistakes
-
-The toolkit should supplement development rather than prevent implementation.
-
-When the Developer Is Stuck
-
-The developer may explicitly ask Cursor for:
-
-A hint
-
-An explanation
-
-A debugging walkthrough
-
-A solution
-
-Complete implementation
-
-The appropriate level of assistance should depend on the task.
-
-For learning-oriented problems, prefer progressive guidance when practical.
-
-For implementation tasks, Cursor may provide complete code.
-
-Understanding Check
-
-After significant implementation, the developer should be able to explain:
-
-What the code does
-
-Why it exists
-
-What data flows through it
-
-Important assumptions
-
-Important failure cases
-
-How it can be tested
-
-How it connects to the broader project
-
-This does not mean memorizing every line of code.
+AI should help the developer reach that understanding.
 
 Analytical Decisions
 
-Cursor should not silently choose analytical definitions.
+AI must distinguish between:
 
-For decisions such as:
+Fact
 
-What constitutes a baseline
+Directly supported by the data or an authoritative source.
 
-What constitutes a deviation
+Derived result
 
-Which aggregation to use
+Calculated from available data.
 
-How to handle missing data
+Interpretation
 
-Which time periods are comparable
+An explanation supported by evidence but not directly observed.
 
-Which metrics belong in the dashboard
+Assumption
 
-Cursor should explain the options and tradeoffs.
+Something that has not yet been verified.
 
-The developer should understand and approve the resulting methodology.
+Never present an assumption as a fact.
 
-Architecture Decisions
+Data Investigation
 
-For significant architecture decisions, Cursor should explain:
+When working with a new dataset:
 
-The proposed architecture
+Inspect the actual data.
 
-Why it fits the project
+Determine its grain.
 
-Alternatives considered
+Inspect its schema.
 
-Tradeoffs
+Check data quality.
 
-Complexity introduced
+Identify relevant fields.
 
-Whether the complexity is justified for a first data project
+Determine what can actually be measured.
 
-The project should avoid unnecessary engineering complexity.
+Only then design transformations and analysis.
 
-Data Source Investigation
+Do not design an analytical metric first and assume the dataset supports it.
 
-Before implementing an ingestion pipeline, investigate the actual data source.
+Debugging
 
-The developer should understand:
+When something breaks:
 
-What the source represents
+Reproduce the problem.
 
-What fields are available
+Identify the error.
 
-How frequently it updates
+Determine the root cause.
 
-What historical coverage exists
+Explain the cause.
 
-How timestamps work
+Fix it.
 
-What limitations exist
+Test the fix.
 
-What reliability issues may occur
+Explain why the fix works.
 
-Do not assume that a desired field or metric exists before verifying the source.
+Do not repeatedly change code without understanding the failure.
 
-Documentation
+Architecture
 
-Important decisions should be documented in the appropriate project files.
+Prefer the simplest architecture that satisfies the requirements.
 
-Documentation should capture:
+Do not introduce technologies solely because they appear impressive on a resume.
 
-Project decisions
+Every major component should have a reason to exist.
 
-Analytical methodology
+Research
 
-Architecture decisions
+When external information is required:
 
-Data-source findings
+Prefer primary/official sources.
 
-Important assumptions
+Verify current information.
 
-Known limitations
+Record important sources.
 
-Lessons learned
+Distinguish documented facts from interpretation.
 
-Plan Mode
+Do not invent unavailable information.
 
-Cursor's Plan mode should be used before major implementation work.
+AI Output Review
 
-The initial project handoff should ask Cursor to:
+Before accepting a significant AI-generated implementation, check:
 
-Read the project documentation.
+Does it match the project requirements?
 
-Understand the analytical thesis.
+Does it use the actual data schema?
 
-Understand the two primary analytical questions.
+Are assumptions documented?
 
-Inspect the repository.
+Is error handling appropriate?
 
-Investigate the relevant data sources.
+Is the implementation unnecessarily complex?
 
-Identify technical requirements.
+Can the developer explain it?
 
-Propose an implementation plan.
+Developer Responsibility
 
-Identify uncertainties and assumptions.
+The developer remains responsible for understanding and validating the project.
 
-Identify potential risks.
+AI assistance does not replace:
 
-Avoid implementing the project until the plan has been reviewed.
+testing
 
-The resulting plan should be treated as a proposal, not as unquestionable authority.
+data validation
 
-Development Philosophy
+source verification
 
-The project should follow this principle:
+analytical reasoning
 
-Use AI to increase development speed without outsourcing understanding.
+code review
 
-The goal is to finish with both:
+documentation
 
-A strong portfolio project
-
-A strong understanding of how the project works
+understanding the final system

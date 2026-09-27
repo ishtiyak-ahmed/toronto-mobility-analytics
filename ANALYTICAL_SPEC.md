@@ -1,341 +1,400 @@
 Analytical Specification
-Purpose
+1. Core Analytical Framework
 
-This document defines the analytical direction of the Toronto Mobility Analytics project.
+The project follows:
 
-The project should answer questions about typical mobility patterns and current deviations from those patterns using TTC and Bike Share Toronto data.
-
-The exact metrics and methodology should be refined after investigating the actual public datasets.
-
-Analytical Framework
-
-The project follows a two-stage analytical framework:
-
-Stage 1
-Understand historical mobility patterns
-            ↓
-Stage 2
-Compare current conditions against those patterns
+Historical Observations
+        ↓
+Expected / Typical Patterns
+        ↓
+Current Observations
+        ↓
+Deviation
+        ↓
+Investigation
 
 
-This prevents the project from becoming a collection of disconnected charts.
+The word expected does not automatically mean a statistical prediction.
 
-Question 1: Historical Mobility Patterns
-Primary Question
+A baseline may be:
 
-How do mobility patterns vary across time and location for TTC and Bike Share Toronto?
+historical average
 
-Objective
+median
 
-Determine what typical conditions look like across different temporal and geographic contexts.
+percentile
 
-Dimensions
+distribution
 
-Potential dimensions include:
+time-of-day baseline
 
-Transportation system
+day-of-week baseline
+
+seasonal baseline
+
+The appropriate method must be determined from the data.
+
+2. Question One
+When and where do TTC service disruptions and Bike Share availability pressures typically occur?
+TTC
+
+Potential dimensions:
 
 Date
 
+Time
+
+Day
+
 Hour
 
 Day of week
-
-Weekday/weekend
-
-Month or season
-
-Station
 
 Route
 
-Geographic area
+Line
 
-Only dimensions supported by the available data should be used.
+Station
 
-Potential Analysis
+Location
 
-Depending on the available datasets, analysis may include:
+Direction
 
-Average or median conditions by hour
+Incident type
 
-Conditions by day of week
+Potential measures:
 
-Weekday versus weekend comparisons
+Number of delay incidents
 
-Temporal heatmaps
+Total delay minutes
 
-Station-level patterns
+Average delay
 
-Route-level patterns
+Median delay
+
+Delay percentiles
+
+Gap-related measures
+
+Potential analyses:
+
+Delay by hour
+
+Delay by weekday
+
+Delay by route/line
+
+Delay by location
+
+Delay by incident type
 
 Seasonal changes
 
-Spatial concentration of activity
+Distribution of delay duration
 
-Variability between locations
+Do not assume these metrics are all appropriate until the actual datasets are inspected.
 
-Important Consideration
+Bike Share
 
-"Typical" must be defined explicitly.
+Potential dimensions:
 
-Possible approaches include:
+Date
 
-Mean
-
-Median
-
-Percentiles
-
-Historical distributions
-
-Rolling statistics
-
-The appropriate method should be determined based on the characteristics of the data.
-
-Question 2: Current Conditions Versus Historical Patterns
-Primary Question
-
-How do current TTC and Bike Share conditions compare with their historical patterns, and where are the largest deviations occurring?
-
-Objective
-
-Use live/current observations together with historical data to identify conditions that differ meaningfully from what would normally be expected.
-
-Comparison Framework
-
-Conceptually:
-
-Current Observation
-        ↓
-Identify Comparable Historical Context
-        ↓
-Historical Baseline
-        ↓
-Compare
-        ↓
-Measure Deviation
-        ↓
-Identify Locations / Periods of Interest
-
-
-A current observation should not be compared against an arbitrary historical average.
-
-For example, a current Monday at 8:00 AM should ideally be compared against appropriate historical Monday 8:00 AM observations rather than all historical observations.
-
-The exact comparison groups should be determined during implementation.
-
-Historical Baseline
-
-A baseline represents the expected or typical value for a comparable historical context.
-
-Potential baseline dimensions include:
-
-Location
+Time
 
 Hour
 
 Day of week
 
-Weekday/weekend
-
 Season
 
-Transportation system
+Start station
 
-The baseline methodology must account for the available amount and quality of historical data.
+End station
 
-Deviation
+Station location
 
-A deviation represents the difference between a current observation and its historical expectation.
+Potential measures:
 
-Possible approaches include:
+Trip count
 
-Absolute Difference
-Current Value - Historical Baseline
+Departures
 
-Relative Difference
-(Current Value - Historical Baseline)
--------------------------------------
-Historical Baseline
+Arrivals
 
-Standardized Difference
+Net station flow
 
-Where appropriate, the analysis could account for historical variability rather than only comparing against a central value.
+Origin/destination volume
 
-The final methodology should be selected after examining the data.
+Trip duration
 
-The project should avoid inventing a sophisticated statistical method merely to appear advanced.
+Potential analyses:
 
-Cross-System Analysis
+Demand by hour
 
-TTC and Bike Share should be analyzed as two transportation systems contributing to the same mobility question.
+Demand by weekday
 
-The project should not force direct comparisons between metrics that do not measure the same thing.
+Station activity
 
-Instead, the systems can be compared at the level of:
+Station inflow/outflow
 
-Temporal patterns
+Seasonal patterns
 
-Spatial patterns
+Commuter versus leisure-like temporal patterns where the data supports such interpretation
 
-Current versus historical behavior
+3. Question Two
+Where do current TTC and Bike Share conditions deviate from expected patterns?
 
-Locations experiencing unusual conditions
+This question requires carefully defining what constitutes a deviation.
 
-Changes across time
+Bike Share
 
-Where metrics are not directly comparable, the dashboard should clearly communicate that distinction.
+Possible approach:
 
-Potential Analytical Outputs
+Establish historical station activity patterns.
 
-The final analysis may include:
+Establish expected conditions for comparable time periods.
 
-Historical Pattern Views
+Collect current station status.
 
-Mobility patterns by hour
+Compare current availability with the relevant baseline.
 
-Mobility patterns by day of week
+Flag unusual conditions.
 
-Weekday/weekend differences
+Allow the user to investigate the station historically.
 
-Historical station behavior
+Potential concepts:
+
+unusually low bike availability
+
+unusually high bike availability
+
+unusually low dock availability
+
+station imbalance
+
+persistence of an unusual condition
+
+Do not implement these definitions until the historical and live data have been inspected.
+
+TTC
+
+Possible approach:
+
+Establish historical delay/service-disruption patterns.
+
+Retrieve current service information.
+
+Identify active/current conditions.
+
+Provide historical context where a meaningful comparison exists.
+
+Clearly distinguish live observations from historical delay measures.
+
+TTC real-time limitations must be incorporated into the methodology.
+
+4. Deviation Methodology
+
+A deviation should be interpretable.
+
+For example:
+
+Current Value
+      -
+Expected Value
+      =
+Absolute Deviation
+
+
+or:
+
+Current Value / Expected Value
+
+
+or a percentile-based approach.
+
+The correct method depends on the variable.
+
+Avoid arbitrary anomaly scores without an analytical justification.
+
+5. Historical Baselines
+
+A baseline must account for relevant temporal structure.
+
+Potential comparison groups:
+
+Same hour
+
+Same weekday
+
+Same season
+
+Weekday versus weekend
+
+Comparable station
+
+Comparable operating period
+
+The project must avoid comparing fundamentally different operating conditions.
+
+For example, comparing a Monday 8 AM observation against an unconditional yearly average may be misleading.
+
+6. Geographic Analysis
+
+Location is an analytical dimension.
+
+Potential spatial units:
+
+TTC
+
+Route
+
+Line
+
+Station
+
+Recorded delay location
+
+Bike Share
+
+Station
+
+Station cluster
+
+Geographic area where justified
+
+Maps should allow users to investigate analytical results.
+
+A map is not itself an analytical conclusion.
+
+7. Dashboard Structure
+
+Potential BI structure:
+
+Overview
+
+Current system snapshot
+
+Key historical context
+
+Current unusual conditions
+
+Links into deeper analysis
+
+Historical Patterns
+
+TTC delay patterns
+
+Bike Share activity patterns
+
+Time trends
 
 Geographic patterns
 
-Current Condition Views
+Current Conditions
 
-Current system conditions
+Current Bike Share station state
 
-Current station conditions
+Current TTC service information
 
-Current conditions by location
+Current deviations where supported
 
-Recent changes
+Map
 
-Comparison Views
+Spatial investigation
 
-Current versus historical baseline
+Station-level details
 
-Absolute deviation
+Current condition
 
-Relative deviation
+Historical context
 
-Locations with unusual conditions
+Detail View
 
-Time periods with unusual conditions
+Potentially:
 
-Station-Level Investigation
+Selected station/route
 
-For Bike Share stations, the analysis may support a detailed station view.
+Historical distribution
 
-A station detail page/view could show:
+Current observation
 
-Current station conditions
+Expected condition
 
-Historical typical conditions
+Deviation
 
-Current versus historical difference
+Relevant metadata
 
-Historical patterns by hour
+8. Analytical Integrity Requirements
 
-Historical patterns by day of week
+The project must distinguish:
 
-Recent observations
+Observed
 
-Geographic context
+Directly present in the source data.
 
-The exact station metrics depend on the available public data.
+Derived
 
-Geographic Analysis
+Calculated from source data.
 
-Geography should be used where it provides analytical value.
+Inferred
 
-Potential geographic analysis includes:
+An interpretation supported by evidence but not directly measured.
 
-Station-level maps
+Unknown
 
-Spatial distribution of activity
+Not supported by available data.
 
-Current availability by location
+Do not describe inferred information as directly observed.
 
-Historical patterns by location
+9. Data Limitations
 
-Locations with unusually high deviations
+Important limitations currently known include:
 
-An interactive map should not exist independently of the analytical framework.
+TTC
 
-Data Quality Requirements
+TTC real-time data has documented coverage limitations, including limitations involving subway real-time location/arrival predictions, Line 6 information, and some alert structure.
 
-Before analytical results are trusted, the project should investigate:
+Bike Share
 
-Missing records
+The live GBFS station-status feed represents current station state rather than providing an arbitrary historical archive of station states.
 
-Duplicate records
+Therefore, this project should collect timestamped live observations if historical station-state analysis is required.
 
-Invalid values
+Cross-Mode Comparability
 
-Timestamp consistency
+TTC and Bike Share should not be reduced to one common numerical mobility score.
 
-Time zone handling
+Their metrics and data-generating processes differ.
 
-Changes in station identifiers
+The common framework is methodological:
 
-Changes in station capacity
+historical pattern → expected condition → current observation → deviation
 
-Feed outages
+10. Success Criteria
 
-API failures
+The analysis is successful if a user can answer:
 
-Unexpected values
+What are the major historical patterns?
 
-Historical coverage
+When and where does pressure typically occur?
 
-Data-quality decisions should be documented.
+What is happening currently?
 
-Analytical Validation
+Is the current condition unusual?
 
-The developer should be able to explain:
+How unusual is it?
 
-What each metric measures
+Where is it occurring?
 
-Why each metric was selected
+What historical context explains the result?
 
-How historical baselines are calculated
+What limitations affect the interpretation?
 
-How current observations are matched to historical contexts
+The dashboard should not merely answer:
 
-How deviations are calculated
+"What is happening right now?"
 
-What limitations exist
+It should help answer:
 
-What conclusions the data does and does not support
-
-The project should distinguish between:
-
-Observed facts
-
-Calculated metrics
-
-Analytical interpretations
-
-Assumptions
-
-Final Analytical Story
-
-The final dashboard and project documentation should communicate a coherent story:
-
-What normally happens?
-        ↓
-Where and when does it happen?
-        ↓
-What is happening now?
-        ↓
-How does now compare with normal?
-        ↓
-Where are the largest differences?
-        ↓
-What patterns can we observe?
-
-
-This progression should be reflected in the final BI experience.
+"How does what is happening now compare with what normally happens?"

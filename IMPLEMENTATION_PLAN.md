@@ -1,415 +1,211 @@
 Implementation Plan
 Status
 
-Planning phase
+Planning phase — implementation has not started.
 
-This document describes the intended implementation direction.
+This document will contain the implementation plan after the project's actual data sources have been inspected and validated.
 
-The exact architecture, technologies, schemas, and pipeline design should be refined after investigating the actual public data sources.
+The implementation plan must be based on the real characteristics of the available data rather than assumptions.
 
-Phase 0 — Project Setup
-Goals
+Planning Requirements
 
-Establish the project repository
+The final implementation plan should determine:
 
-Configure Git
+1. Data Sources
 
-Install the Cursor learning toolkit
+Exact historical datasets
 
-Establish project documentation
+Exact live/current feeds
 
-Configure project-specific Cursor instructions
+Source URLs
 
-Deliverables
+Refresh behavior
 
-Git repository
+Historical coverage
 
-Project documentation
+Data licensing
 
-.cursor/ learning toolkit
+Schema
 
-Project-specific Cursor rules
+2. Data Validation
 
-Phase 1 — Data Source Investigation
-Goals
+For each source:
 
-Understand what public data is actually available from:
+Data grain
 
-TTC
+Data types
 
-Bike Share Toronto
+Missing values
 
-Investigate both historical and live/frequently updated sources.
-
-Questions to Answer
-
-What datasets are available?
-
-What does each dataset represent?
-
-What fields are available?
-
-What is the update frequency?
-
-What historical coverage exists?
-
-What identifiers exist?
-
-How are timestamps represented?
-
-What geographic information exists?
-
-What are the data limitations?
-
-Can the data support the two analytical questions?
-
-Deliverable
-
-A documented data-source assessment.
-
-No major pipeline architecture should be finalized before this phase.
-
-Phase 2 — Analytical Data Design
-Goals
-
-Translate the analytical questions into measurable metrics.
-
-Determine:
-
-Which historical metrics are useful
-
-Which current metrics are available
-
-How historical baselines should be calculated
-
-How comparable historical observations should be selected
-
-How deviations should be measured
-
-Which dimensions are necessary
-
-Which aggregations are appropriate
-
-Deliverable
-
-A documented analytical specification based on the actual data.
-
-Phase 3 — Initial Data Ingestion
-Goals
-
-Build a small, working extraction process.
-
-Potential responsibilities:
-
-Request data from public sources
-
-Parse responses
-
-Handle timestamps
-
-Validate responses
-
-Store raw observations
-
-Handle basic failures
-
-The initial implementation should be intentionally small.
-
-The goal is to establish a reliable path from:
-
-Public Data Source
-        ↓
-Extraction
-        ↓
-Raw Data
-
-Phase 4 — Data Storage
-Goals
-
-Determine an appropriate storage solution for the analytical workload.
-
-Potential components may include:
-
-Relational database
-
-Raw data storage
-
-Structured analytical tables
-
-Metadata about ingestion
-
-Timestamped observations
-
-The exact database and schema should be selected based on project requirements rather than predetermined for the sake of complexity.
-
-Phase 5 — Transformation
-Goals
-
-Transform raw data into analysis-ready datasets.
-
-Potential tasks:
-
-Cleaning
-
-Type conversion
-
-Timestamp normalization
-
-Deduplication
-
-Validation
-
-Joining datasets
-
-Aggregation
-
-Historical baseline calculation
-
-Current-versus-historical comparison
-
-The transformations should be reproducible.
-
-Phase 6 — Exploratory Analysis
-Goals
-
-Investigate whether the data actually supports the expected analytical story.
-
-Explore:
-
-Temporal patterns
-
-Spatial patterns
-
-Station-level patterns
-
-Historical distributions
-
-Current conditions
-
-Variability
-
-Potential anomalies or deviations
-
-This phase may result in changes to the analytical methodology.
-
-That is expected.
-
-Phase 7 — Analytical Dataset
-
-Create a clean dataset or set of datasets specifically designed to support the BI layer.
-
-Potential outputs include:
-
-Historical mobility metrics
-
-Current mobility metrics
-
-Historical baselines
-
-Deviation metrics
-
-Station-level metrics
-
-Geographic metrics
-
-The analytical model should prioritize clarity and usability.
-
-Phase 8 — BI Dashboard
-Goals
-
-Build an interactive BI experience that answers the project's questions.
-
-The dashboard should likely include:
-
-Overview
-
-Current conditions
-
-Key analytical findings
-
-Historical context
-
-Historical Patterns
-
-Time-of-day patterns
-
-Day-of-week patterns
-
-Geographic patterns
-
-Current Versus Historical
-
-Current values
-
-Historical baseline
-
-Deviations
-
-Locations requiring attention
-
-Station Detail
-
-Where supported by the data:
-
-Current station condition
-
-Historical pattern
-
-Current versus historical comparison
-
-Recent observations
-
-Interactive Map
-
-Include a map if it provides analytical value.
-
-Possible functionality:
-
-Select stations
-
-Inspect current conditions
-
-View deviations
-
-Filter by time/system
-
-Connect geographic selection to analytical views
-
-Phase 9 — Validation
-
-Validate both the data system and analytical results.
-
-Data Validation
-
-Check:
-
-Missing data
-
-Duplicate records
+Duplicates
 
 Invalid values
 
-Timestamp issues
+Timestamp quality
 
-Feed failures
+Identifier consistency
 
-Unexpected schema changes
+Schema changes
 
-Identifier changes
+Geographic consistency
 
-Data freshness
+3. Data Architecture
 
-Analytical Validation
+Determine:
 
-Check:
+Raw data layer
 
-Baseline calculations
+Staging/transformation layer
+
+Analytical layer
+
+Storage technology
+
+Table/file structure
+
+Data relationships
+
+4. Ingestion
+
+Determine:
+
+Historical ingestion process
+
+Live ingestion process
+
+Scheduling
+
+Timestamping
+
+Raw-data preservation
+
+Error handling
+
+Retry behavior
+
+Logging
+
+5. Transformations
+
+Determine:
+
+Cleaning
+
+Standardization
+
+Derived fields
 
 Aggregations
 
-Comparability of time periods
+Station/route dimensions
+
+Time dimensions
+
+Analytical tables
+
+6. Analytical Methodology
+
+Determine:
+
+Historical baselines
+
+Expected-condition definitions
 
 Deviation calculations
 
-Edge cases
+Anomaly criteria
 
-Whether visualizations accurately represent the underlying data
+Temporal comparisons
 
-Phase 10 — Documentation
+Geographic comparisons
 
-Document:
+The methodology must be justified by the actual data.
 
-Project motivation
+7. BI
 
-Analytical questions
+Determine:
 
-Data sources
+Dashboard structure
 
-Data architecture
+Key metrics
 
-Pipeline
+Filters
 
-Data model
+Charts
 
-Analytical methodology
+Tables
 
-BI design
+Map
 
-Data-quality decisions
+Detail views
 
-Limitations
+Current-condition views
 
-Lessons learned
+8. Testing
 
-The README should eventually provide a concise overview suitable for a portfolio/GitHub visitor.
+Determine:
 
-Phase 11 — Portfolio Preparation
+Unit tests
 
-The final project should communicate:
+Data validation tests
 
-Analytics
+Pipeline tests
 
-Ability to formulate analytical questions
+Analytical validation
 
-Ability to work with historical and current data
+Integration tests
 
-Ability to create meaningful metrics
+9. Deployment
 
-Ability to interpret results
+Determine:
 
-BI
+Local development process
 
-Ability to design an analytical dashboard
+Configuration
 
-Ability to communicate findings visually
+Secrets/environment variables
 
-Ability to use interactive filtering
+Scheduling
 
-Ability to use geographic visualization appropriately
+Deployment requirements
 
-Data Engineering
-
-Ability to extract data from public sources
-
-Ability to build a repeatable ingestion process
-
-Ability to store and transform data
-
-Ability to validate data
-
-Understanding of basic pipeline architecture
-
-The project should remain primarily an analytics/BI project rather than becoming a full-scale data engineering system.
-
-Development Order
-
-The intended high-level progression is:
-
-Project Setup
-      ↓
-Data Source Investigation
-      ↓
-Analytical Design
-      ↓
-Initial Ingestion
-      ↓
-Storage
-      ↓
-Transformation
-      ↓
-Exploratory Analysis
-      ↓
-Analytical Dataset
-      ↓
-BI Dashboard
-      ↓
-Validation
-      ↓
 Documentation
-      ↓
-Portfolio Presentation
+
+Development Principle
+
+The project should be implemented incrementally.
+
+A likely sequence is:
+
+Data Investigation
+        ↓
+Source Validation
+        ↓
+Architecture
+        ↓
+Historical Data Pipeline
+        ↓
+Historical Analysis
+        ↓
+Live Data Pipeline
+        ↓
+Current/Deviation Analysis
+        ↓
+BI
+        ↓
+Interactive Map
+        ↓
+Testing
+        ↓
+Documentation
+        ↓
+Deployment
 
 
-This is a proposed sequence, not a rigid requirement.
+This sequence is provisional and should be revised after actual data inspection.
 
-The implementation plan should be updated as new information about the data and analytical requirements is discovered.
+Important Constraint
+
+Do not add technologies or architecture components without a demonstrated project requirement.
+
+The final system should be understandable to the developer and explainable in an interview.
